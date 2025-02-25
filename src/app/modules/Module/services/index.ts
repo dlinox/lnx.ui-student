@@ -1,5 +1,4 @@
 import { http } from "@/core/http";
-import type { ModuleEnrollmentFormDTO } from "../types";
 
 const modulePath = "module" as const;
 

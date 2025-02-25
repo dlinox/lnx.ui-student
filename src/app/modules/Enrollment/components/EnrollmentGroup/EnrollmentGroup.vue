@@ -47,7 +47,7 @@
                             class="rounded-0 me-1"
                             density="compact"
                             color="primary"
-                            v-for="(schedule, i) in item.schedules"
+                            v-for="schedule in item.schedules"
                           >
                             {{ schedule.day }} {{ schedule.startHour }} -
                             {{ schedule.endHour }}

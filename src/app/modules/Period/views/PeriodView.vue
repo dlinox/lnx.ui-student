@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-import DataTable from "../components/DataTable/DataTable.vue";
 
 const initView = async () => {};
 
