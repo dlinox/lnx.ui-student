@@ -1,1 +1,0 @@
-import{n as t,aY as e,b as n}from"./index-CkNYxJqC.js";const o="period",a=async()=>{try{return(await t().get(`/${o}/current`)).data.data}catch{return{}}},c=e("period",()=>{const r=n(null);return{current:r,getCurrent:async()=>{r.value=await a()}}});export{c as u};

@@ -1,1 +1,0 @@
-import{n as e}from"./index-CkNYxJqC.js";const a="module",o=async r=>{try{return(await e().get(`${a}/curriculum/${r}`)).data.data}catch{return[]}},c=async(r,t)=>{try{return(await e().get(`${a}/${r}/curriculum/${t}`)).data.data}catch{return{}}};export{o as _,c as a};

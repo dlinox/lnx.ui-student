@@ -31,7 +31,7 @@
           </template>
         </v-list-item>
 
-        <v-list-item key="enrollment" title="Matrículas" link exact>
+        <!-- <v-list-item key="enrollment" title="Matrículas" link exact>
           <template v-slot:prepend>
             <LnxIcon iconName="element-4" />
           </template>
@@ -47,7 +47,7 @@
           <template v-slot:prepend>
             <LnxIcon iconName="element-4" />
           </template>
-        </v-list-item>
+        </v-list-item> -->
       </v-list>
       <template #append>
         <v-list three-line>

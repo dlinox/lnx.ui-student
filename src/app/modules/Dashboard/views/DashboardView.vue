@@ -1,7 +1,7 @@
 <template>
   <v-card
     title="Bienvenido"
-    subtitle="Sistema de gestión de asistencia del Instituto de Informática UNA - PUNO"
+    subtitle="Instituto de Informática UNA - PUNO"
     class="rounded-0"
     elevation="0"
   />
