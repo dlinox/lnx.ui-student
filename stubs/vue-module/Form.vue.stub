@@ -1,0 +1,59 @@
+<template>
+  <v-dialog max-width="500" v-model="dialog" activator="parent">
+    <v-form ref="formRef" @submit.prevent="submit">
+      <v-card :title="id ? 'Editar Registro' : 'Nuevo Registro'">
+        <v-card-item class="border-t border-b">
+          <v-row>
+            <v-col cols="12" class="d-flex justify-end">
+              <v-switch
+                v-model="form.isActive"
+                inset
+                density="compact"
+                color="indigo"
+                label="Activo"
+              />
+            </v-col>
+          </v-row>
+        </v-card-item>
+        <v-card-actions>
+          <v-btn type="button" variant="tonal" color="secondary" @click="dialog = false">Cancelar</v-btn>
+          <v-btn text="Guardar" color="primary" type="submit" variant="flat" :loading="loading"></v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-form>
+  </v-dialog>
+</template>
+<script setup lang="ts">
+import { ref, watch } from "vue";
+import { _getFormItem, _saveItem } from "../../services";
+import type { {{moduleName}}FormDTO } from "../../types";
+import { initialFormState, validationRules } from "./constants";
+
+const emit = defineEmits(["success"]);
+const props = defineProps<{ id: number | null }>();
+
+const formRef = ref<HTMLFormElement | null>(null);
+const loading = ref<boolean>(false);
+const dialog = ref<boolean>(false);
+const form = ref<{{moduleName}}FormDTO>(Object.assign({}, initialFormState()));
+
+const getFormItem = async () => {
+  if (props.id) {
+    loading.value = true;
+    form.value = await _getFormItem(props.id);
+    loading.value = false;
+  }
+};
+
+const submit = async () => {
+  const { valid } = await formRef.value!.validate();
+  if (!valid) return;
+  loading.value = true;
+  await _saveItem(form.value);
+  emit("success");
+  dialog.value = false;
+  loading.value = false;
+};
+
+watch(() => dialog.value, (value) => { if (value) getFormItem(); });
+</script>

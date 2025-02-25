@@ -1,0 +1,59 @@
+import { http } from "@/core/http";
+import {
+  type DataTableRequestDTO,
+  type DataTableResponseDTO,
+} from "@/core/types/DataTable.types";
+
+import type { {{moduleName}}DTO, {{moduleName}}FormDTO } from "../types";
+
+const modulePath = "{{moduleName}}" as const;
+
+/**
+ * Cargar datos para la tabla
+ */
+export const _loadDataTable = async (
+  request: DataTableRequestDTO
+): Promise<DataTableResponseDTO<{{moduleName}}DTO>> => {
+  try {
+    const response = await http().post(`${modulePath}/load-datatable`, request);
+    return response.data.data as DataTableResponseDTO<{{moduleName}}DTO>;
+  } catch (error) {
+    return {} as DataTableResponseDTO<{{moduleName}}DTO>;
+  }
+};
+
+/**
+ * Obtener un registro por ID para el formulario
+ */
+export const _getFormItem = async (id: number): Promise<{{moduleName}}FormDTO> => {
+  try {
+    const response = await http().get(`${modulePath}/get-form-item/${id}`);
+    return response.data.data as {{moduleName}}FormDTO;
+  } catch (error) {
+    return {} as {{moduleName}}FormDTO;
+  }
+};
+
+/**
+ * Guardar o actualizar un registro
+ */
+export const _saveItem = async (data: {{moduleName}}FormDTO): Promise<boolean> => {
+  try {
+    await http().post(`${modulePath}/save-item`, data);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+/**
+ * Eliminar un registro por ID
+ */
+export const _deleteItem = async (id: number): Promise<boolean> => {
+  try {
+    await http().delete(`${modulePath}/delete-item/${id}`);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

@@ -1,0 +1,10 @@
+import { required } from "@/core/utils/rules.utils";
+import type { {{moduleName}}FormDTO } from "../../types";
+
+export const initialFormState = (): {{moduleName}}FormDTO => ({
+  isActive: true,
+});
+
+export const validationRules = {
+  isActive: [required],
+};
