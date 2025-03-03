@@ -4,7 +4,7 @@ export default {
       class: "pa-4",
       VBtn: {
         variant: "tonal",
-        rounded: "lg",
+        rounded: "0",
         color: "primary",
         class: "px-6 text-sm",
       },
@@ -14,7 +14,7 @@ export default {
   VBtn: {
     color: "primary",
     style: "font-size: 14px",
-    rounded: "lg",
+    rounded: "0",
     variant: "flat",
     size: "large",
     class: "px-4",

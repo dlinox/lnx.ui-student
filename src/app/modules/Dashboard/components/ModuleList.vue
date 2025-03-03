@@ -1,16 +1,21 @@
 <template>
-  <v-row>
-    <v-col v-for="module in moduleItems" :key="module.id" cols="12" md="4">
-      <v-card elevation="0" class="rounded-5 border" variant="tonal">
+  <v-row :no-gutters="true">
+    <v-col cols="12">
+      <v-card
+        title="Módulos"
+        subtitle="Lista de módulos disponibles"
+        class="rounded-0 border"
+        elevation="0"
+      />
+    </v-col>
+    <v-col v-for="module in moduleItems" :key="module.id" cols="12">
+      <v-card elevation="0" class="rounded-5 border mb-4">
         <v-img
           height="50px"
           src="https://media.istockphoto.com/id/1218737747/vector/learning-online-e-learning-video-call-chat-with-class-distance-education.jpg?s=612x612&w=0&k=20&c=fFFwc3CTP4XtvmruZLiK8EzAbzvAxJL_kw5BsA7z7w8="
           cover
         ></v-img>
         <v-card-title>{{ module.name }}</v-card-title>
-        <v-card-item>
-          {{ module.description }}
-        </v-card-item>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn

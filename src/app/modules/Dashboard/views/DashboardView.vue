@@ -7,11 +7,11 @@
   />
 
   <v-card
-    v-if="periodStore.current?.enrollmentEnabled == 1"
+    v-if="periodStore.enrolled"
     color="info"
     variant="tonal"
     title="¡Matriculas abiertas!"
-    :subtitle="`Las matrículas para el ciclo académico ${periodStore.current?.name} están abiertas.`"
+    :subtitle="`Las matrículas para el ciclo académico ${periodStore.enrolled?.name} están habilitadas.`"
     elevation="0"
     class="rounded-0"
   >
@@ -20,10 +20,13 @@
     </template>
   </v-card>
 
-  <v-container fluid>
+  <v-container >
     <v-row>
-      <v-col>
+      <v-col cols="12" md="7">
         <ModuleList />
+      </v-col>
+      <v-col cols="12" md="5">
+        <CoursesExtracurricularList />
       </v-col>
     </v-row>
   </v-container>
@@ -32,6 +35,7 @@
 import { onMounted } from "vue";
 import { usePeriodStore } from "@/app/store/period.stores";
 import ModuleList from "../components/ModuleList.vue";
+import CoursesExtracurricularList from "../components/CoursesExtracurricularList.vue";
 const periodStore = usePeriodStore();
 
 const initView = async () => {};

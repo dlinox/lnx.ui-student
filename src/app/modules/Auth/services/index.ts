@@ -13,7 +13,7 @@ import { type AuthRequestDTO } from "../types";
 export const _signIn = async (form: AuthRequestDTO): Promise<boolean> => {
   const authStore = useAuthStore();
   try {
-    let response = await http().post(`/auth/sign-in-student`, form);
+    let response = await http().post(`/auth/sign-in`, form);
 
     setSessionToken(response.data.data.token);
     authStore.setAuthState(response.data.data, true);
@@ -24,8 +24,11 @@ export const _signIn = async (form: AuthRequestDTO): Promise<boolean> => {
 };
 
 export const _signUp = async (form: any): Promise<boolean> => {
+  const authStore = useAuthStore();
   try {
-    await http().post(`/auth/sign-up`, form);
+    let response = await http().post(`/auth/sign-up`, form);
+    setSessionToken(response.data.data.token);
+    authStore.setAuthState(response.data.data, true);
     return true;
   } catch (error) {
     return false;

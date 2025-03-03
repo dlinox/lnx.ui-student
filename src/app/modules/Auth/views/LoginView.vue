@@ -28,26 +28,27 @@
                     v-model="from.password"
                     autocomplete="current-password"
                   />
+
+                  <!-- <div class="text-end mt-3">
+                    <router-link to="/recuperar-contrasena">
+                      ¿Olvidaste tu contraseña?
+                    </router-link>
+                  </div> -->
                 </v-col>
                 <v-col cols="12">
-                  <v-btn block color="primary" type="submit">
+                  <v-btn block color="primary" type="submit" :loading="loading">
                     Iniciar sesión
                     <template v-slot:append>
                       <lnx-icon iconName="login-1" />
                     </template>
                   </v-btn>
                 </v-col>
-                <v-col cols="12">
-                  <v-btn block color="secondary" :to="{ name: 'Register' }">
-                    Registrarse
-                    <template v-slot:append>
-                      <lnx-icon iconName="user-plus" />
-                    </template>
-                  </v-btn>
+                <v-col cols="12" class="text-end">
+                  ¿No tienes cuenta?
+                  <router-link to="/registro">Registrarse</router-link>
                 </v-col>
               </v-row>
             </v-card-item>
-
             <v-card-item class="text-center">
               <small> v0.1 </small>
             </v-card-item>
@@ -65,8 +66,12 @@ const from = ref({
   username: "",
   password: "",
 });
+
+const loading = ref<boolean>(false);
 const submit = async () => {
+  loading.value = true;
   await _signIn(from.value);
+  loading.value = false;
 };
 </script>
 

@@ -18,13 +18,16 @@ export const http = (
     (response) => {
       if (response.data.message) {
         toast.success(response.data.message);
-        console.log(response.data);
       }
       return response;
     },
     (error: any) => {
-      toast.error(error.response?.data.message || "Error desconocido");
-      console.log(error.response?.data);
+      if (error.response?.status === 300) {
+        toast.warning(error.response?.data.message || "Error desconocido");
+      } else {
+        toast.error(error.response?.data.message || "Error desconocido");
+        console.log(error.response?.data);
+      }
       return Promise.reject(error);
     }
   );

@@ -3,7 +3,16 @@
     <v-form ref="formRef" @submit.prevent="submit">
       <v-card :title="course?.name" subtitle="Registrar pago">
         <v-item-group mandatory class="border-t">
-          <v-container style="max-height: 220px; overflow-y: auto">
+          <v-container
+            style="height: auto; max-height: 280px; overflow-y: auto"
+          >
+            <v-alert
+              v-if="groupItems.length === 0"
+              type="warning"
+              variant="tonal"
+            >
+              No hay grupos habilitados para este curso.
+            </v-alert>
             <v-row dense>
               <v-col v-for="(item, index) in groupItems" :key="index" cols="12">
                 <v-item v-slot="{ isSelected, toggle }">
@@ -122,9 +131,6 @@
             :loading="loadingForm"
           ></v-btn>
         </v-card-actions>
-        <pre>
-            {{ form }}
-        </pre>
       </v-card>
     </v-form>
   </v-dialog>

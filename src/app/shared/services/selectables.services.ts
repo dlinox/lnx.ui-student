@@ -5,18 +5,12 @@ export const __getStudentTypesForSelect = async (): Promise<
   ItemSelectable[]
 > => {
   try {
-    const response = await http().get(`/student-type/items/for-select`);
-    let items = response.data.data.map((item: any) => ({
-      value: item.value,
-      title: item.label,
-    }));
-    return items as ItemSelectable[];
+    const response = await http().get(`/student-types/items/for-select`);
+    return response.data.data;
   } catch (error) {
     return [];
   }
 };
-
-// getCurrentPeriod
 
 export const __getCurrentPeriod = async (): Promise<ItemSelectable> => {
   try {
@@ -32,4 +26,3 @@ export const __getCurrentPeriod = async (): Promise<ItemSelectable> => {
     };
   }
 };
-

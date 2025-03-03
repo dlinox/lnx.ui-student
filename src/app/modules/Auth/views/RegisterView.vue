@@ -147,11 +147,10 @@ import { ref } from "vue";
 import { __getStudentTypesForSelect } from "@/app/shared/services/selectables.services";
 import { _signUp } from "@/app/modules/Auth/services";
 import type { ItemSelectable } from "@/core/types/ItemSelectable.types";
-import { useRouter } from "vue-router";
 
 const tab = ref<string | null>(null);
 const studentTypes = ref<ItemSelectable[]>([]);
-const router = useRouter();
+
 const form = ref({
   studentTypeId: null,
   documentTypeId: 1,
@@ -168,10 +167,7 @@ const form = ref({
 
 const submit = async () => {
   console.log(form.value);
-  const response = await _signUp(form.value);
-  if (response) {
-    router.push({ name: "Login" });
-  }
+  await _signUp(form.value);
 };
 
 const initView = async () => {

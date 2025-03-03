@@ -80,17 +80,12 @@
       <RouterView />
     </v-main>
     <v-footer app>
-      <v-chip label>
-        <span
-          v-if="periodStore.current?.enrollmentEnabled == 1"
-          :class="
-            periodStore.current?.enrollmentEnabled == 1 ? 'text-blue' : ''
-          "
-        >
-          <LnxIcon iconName="flash-circle-1" size="x-small" class="me-2 mt-1" />
-        </span>
-
+      <v-chip label class="me-2">
         {{ periodStore.current?.name }}
+      </v-chip>
+
+      <v-chip label>
+        {{ periodStore.enrolled?.name }}
       </v-chip>
       <v-spacer> </v-spacer>
       <small> v1.0 </small>
@@ -121,6 +116,7 @@ const signOutBtn = async () => {
 
 const initLayout = async () => {
   periodStore.getCurrent();
+  periodStore.getEnrolled();
 };
 
 onMounted(() => {

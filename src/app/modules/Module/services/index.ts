@@ -1,6 +1,6 @@
 import { http } from "@/core/http";
 
-const modulePath = "module" as const;
+const modulePath = "modules" as const;
 
 export const _getModulesByCurriculum = async (id: number): Promise<any[]> => {
   try {
@@ -10,8 +10,6 @@ export const _getModulesByCurriculum = async (id: number): Promise<any[]> => {
     return [] as any[];
   }
 };
-
-// Route::get('{id}/curriculum/{curriculumId}', [ModuleController::class, 'getModuleByCurriculum']);
 
 export const _getModuleByCurriculum = async (
   id: number | string,
@@ -26,6 +24,3 @@ export const _getModuleByCurriculum = async (
     return {} as any;
   }
 };
-
-// Route::post('store', [EnrollmentController::class, 'storeStudentEnrollment']);
-
