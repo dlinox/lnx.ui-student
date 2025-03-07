@@ -16,13 +16,25 @@
           cover
         ></v-img>
         <v-card-title>{{ module.name }}</v-card-title>
+        <v-card-item>
+          <v-row no-gutters>
+            <v-col cols="12" class="border-right">
+              <small>
+                {{ module.coursesCount }} Cursos | {{ module.credits }} Creditos
+                | {{ module.hoursPractice }} Hr. Practicas |
+                {{ module.hoursTheory }} Hr. Teoricas
+              </small>
+            </v-col>
+            <v-col cols="6"> </v-col>
+          </v-row>
+        </v-card-item>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
             @click="router.push({ name: 'Course', params: { id: module.id } })"
             link
           >
-            ver curso
+            ver modulo
           </v-btn>
         </v-card-actions>
       </v-card>

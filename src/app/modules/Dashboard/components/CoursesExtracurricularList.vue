@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sticky top-0 z-10 bg-white">
     <v-row :no-gutters="true">
       <v-col cols="12">
         <v-card
@@ -8,19 +8,21 @@
           class="rounded-0 border"
         />
       </v-col>
-      <v-col cols="12" >
+      <v-col cols="12">
         <div class="wrapper-list-courses-extracurricular">
           <v-card
             elevation="0"
             class="rounded-0 border"
-            v-for="(course, index) in courseItems" :key="index"
+            v-for="(course, index) in courseItems"
+            :key="index"
             :subtitle="course?.area"
           >
-            <template v-slot:append>
-              <v-chip
-                color="primary"
-                class="rounded-0"
-                v-if="course.hasEnrollmentGroup"
+          
+          <template v-slot:append>
+            <v-chip
+            color="primary"
+            class="rounded-0"
+            v-if="course.hasEnrollmentGroup"
               >
                 Inscrito
               </v-chip>
@@ -31,9 +33,10 @@
                 {{ course.name }}
               </small>
             </v-card-title>
+            <v-card-item>{{ course.description }}</v-card-item>
             <v-card-item>
               <small>
-                Creditos {{ course.credits }} | {{ course.hoursPractice }} Hr.
+                {{ course.credits }} Creditos  | {{ course.hoursPractice }} Hr.
                 Practicas | {{ course.hoursTheory }} Hr. Teoricas
               </small>
             </v-card-item>

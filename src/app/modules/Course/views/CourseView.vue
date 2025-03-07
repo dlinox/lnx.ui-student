@@ -27,20 +27,27 @@
             >
               <template v-slot:append>
                 <v-btn
-                  v-if="module?.isEnrolled == true"
+                  v-if="
+                    module?.isEnrolled == true && !course.hasEnrollmentGroup
+                  "
                   density="compact"
                   variant="outlined"
                 >
                   <EnrollmentGroup :course="course" @success="initView" />
                   Inscríbete
                 </v-btn>
+                <v-chip v-else color="primary" rounded="0" class="rounded-0">
+                  {{ course.group }} - {{ course.period }}
+                </v-chip>
               </template>
+
               <v-card-title class="pt-0">
                 <small>
                   <strong>{{ course.code }} - </strong>
                   {{ course.name }}
                 </small>
               </v-card-title>
+              <v-card-item>{{ course.description }}</v-card-item>
               <v-card-item>
                 <small>
                   Creditos {{ course.credits }} | {{ course.hoursPractice }} Hr.

@@ -182,7 +182,7 @@ const initForm = async () => {
   };
 
   groupItems.value = await _enabledGroupsEnrollment({
-    curriculumCourseId: props.course.curriculumCourseId,
+    courseId: props.course.id,
   });
 };
 

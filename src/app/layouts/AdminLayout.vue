@@ -80,13 +80,7 @@
       <RouterView />
     </v-main>
     <v-footer app>
-      <v-chip label class="me-2">
-        {{ periodStore.current?.name }}
-      </v-chip>
-
-      <v-chip label>
-        {{ periodStore.enrolled?.name }}
-      </v-chip>
+      
       <v-spacer> </v-spacer>
       <small> v1.0 </small>
     </v-footer>
