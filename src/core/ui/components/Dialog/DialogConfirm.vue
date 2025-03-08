@@ -14,7 +14,7 @@
           type="button"
           color="secondary"
           variant="text"
-          @click="dialog = false && emit('onCancel')"
+          @click="onClose"
           :disabled="loading"
         >
           {{ textCancel }}
@@ -23,7 +23,7 @@
         <v-btn
           type="button"
           color="primary"
-          @click="emit('onConfirm')"
+          @click="onConfirm"
           :loading="loading"
         >
           {{ textConfirm }}
@@ -62,4 +62,12 @@ defineProps({
 });
 
 const dialog = ref<boolean>(false);
+const onClose = () => {
+  dialog.value = false;
+  emit("onCancel");
+};
+const onConfirm = () => {
+  emit("onConfirm");
+  dialog.value = false;
+};
 </script>

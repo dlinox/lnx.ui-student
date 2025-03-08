@@ -1,5 +1,9 @@
 <template>
-  <v-card title="Enrollments" subtitle="Gestión de enrollments" class="rounded-0">
+  <v-card
+    title="Mis matriculas"
+    subtitle="Lista de matriculas realizadas"
+    class="rounded-0"
+  >
     <template v-slot:append>
       <v-btn variant="text" @click="$router.go(-1)">
         <template v-slot:prepend>
@@ -14,6 +18,7 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
+import DataTable from "@/app/modules/Enrollment/components/DataTable/DataTable.vue";
 
 const initView = async () => {};
 

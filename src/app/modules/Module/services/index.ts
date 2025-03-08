@@ -2,9 +2,9 @@ import { http } from "@/core/http";
 
 const modulePath = "modules" as const;
 
-export const _getModulesByCurriculum = async (id: number): Promise<any[]> => {
+export const _getModulesByCurriculum = async (data: any): Promise<any[]> => {
   try {
-    const response = await http().get(`${modulePath}/curriculum/${id}`);
+    const response = await http().post(`${modulePath}/curriculum`, data);
     return response.data.data as any[];
   } catch (error) {
     return [] as any[];

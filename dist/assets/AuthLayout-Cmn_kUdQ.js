@@ -1,0 +1,1 @@
+import{_ as o,r,c as s,o as c,w as e,a as t}from"./index-DgkKF6Ex.js";import{V as n,a as _}from"./VMain-h9M824Gt.js";const i={};function u(p,f){const a=r("router-view");return c(),s(_,{id:"inspire"},{default:e(()=>[t(n,{class:"auth-layout-main"},{default:e(()=>[t(a)]),_:1})]),_:1})}const d=o(i,[["render",u]]);export{d as default};

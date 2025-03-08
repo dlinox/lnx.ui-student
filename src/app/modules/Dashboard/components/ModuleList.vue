@@ -2,8 +2,8 @@
   <v-row :no-gutters="true">
     <v-col cols="12">
       <v-card
-        title="Módulos"
-        subtitle="Lista de módulos disponibles"
+        :title="props.title"
+        :subtitle="props.subtitle"
         class="rounded-0 border"
         elevation="0"
       />
@@ -46,10 +46,18 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { _getModulesByCurriculum } from "@/app/modules/Module/services";
 
+const props = defineProps<{
+  title: string;
+  subtitle: string;
+  onlyEnrolled: boolean;
+}>();
+
 const router = useRouter();
 const moduleItems = ref<any[]>([]);
 const initComponent = async () => {
-  moduleItems.value = await _getModulesByCurriculum(2);
+  moduleItems.value = await _getModulesByCurriculum({
+    onlyEnrolled: props.onlyEnrolled,
+  });
 };
 
 initComponent();

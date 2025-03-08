@@ -10,6 +10,8 @@ import {
 } from "@/app/middleware/auth.middleware";
 
 import CourseRoutes from "@/app/modules/Course/routes";
+import EnrollmentRoutes from "@/app/modules/Enrollment/routes";
+import ModuleRoutes from "@/app/modules/Module/routes";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -43,6 +45,8 @@ const routes: RouteRecordRaw[] = [
           import("@/app/modules/Dashboard/views/DashboardView.vue"),
       },
       ...CourseRoutes,
+      ...EnrollmentRoutes,
+      ...ModuleRoutes,
     ],
   },
   {

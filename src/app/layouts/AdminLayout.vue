@@ -31,23 +31,35 @@
           </template>
         </v-list-item>
 
-        <!-- <v-list-item key="enrollment" title="Matrículas" link exact>
+        <v-list-item
+          key="enrollment"
+          title="Matrículas"
+          link
+          exact
+          :to="{ name: 'Enrollment' }"
+        >
           <template v-slot:prepend>
             <LnxIcon iconName="element-4" />
           </template>
         </v-list-item>
-
+        <!-- 
         <v-list-item key="schedule" title="Horario" to="/mi-horario" link exact>
           <template v-slot:prepend>
             <LnxIcon iconName="element-4" />
           </template>
         </v-list-item>
-
-        <v-list-item key="module" title="Módulos" to="/mis-modulos" link exact>
+ -->
+        <v-list-item
+          key="module"
+          title="Módulos"
+          :to="{ name: 'Modules' }"
+          link
+          exact
+        >
           <template v-slot:prepend>
             <LnxIcon iconName="element-4" />
           </template>
-        </v-list-item> -->
+        </v-list-item>
       </v-list>
       <template #append>
         <v-list three-line>
@@ -80,7 +92,6 @@
       <RouterView />
     </v-main>
     <v-footer app>
-      
       <v-spacer> </v-spacer>
       <small> v1.0 </small>
     </v-footer>
@@ -92,7 +103,10 @@ import { ref, onMounted } from "vue";
 import { useAuthStore } from "@/app/store/auth.stores";
 import { usePeriodStore } from "../store/period.stores";
 import LnxIcon from "@/core/ui/components/icons/LnxIcon.vue";
+import { useRouter } from "vue-router";
+import { _signOut } from "@/app/modules/Auth/services";
 
+const router = useRouter();
 const authStore = useAuthStore();
 const periodStore = usePeriodStore();
 const drawer = ref(true);
@@ -101,10 +115,10 @@ const loading = ref<boolean>(false);
 const open = ref([""]);
 const signOutBtn = async () => {
   loading.value = true;
-  //   const res = await signOut();
-  //   if (res) {
-  //     router.push({ name: "Login" });
-  //   }
+  const res = await _signOut();
+  if (res) {
+    router.push({ name: "Login" });
+  }
   loading.value = false;
 };
 

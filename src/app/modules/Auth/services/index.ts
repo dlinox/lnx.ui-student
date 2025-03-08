@@ -35,11 +35,10 @@ export const _signUp = async (form: any): Promise<boolean> => {
   }
 };
 
-export const signOut = async () => {
+export const _signOut = async () => {
   const authStore = useAuthStore();
   try {
-    let token = getSessionToken();
-    await http(token).post(`/auth/sign-out`, null);
+    await http().post(`/auth/sign-out`, null);
     removeSessionToken();
     authStore.singOut();
     return true;

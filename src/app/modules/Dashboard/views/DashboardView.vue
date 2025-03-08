@@ -20,10 +20,14 @@
     </template>
   </v-card>
 
-  <v-container >
+  <v-container>
     <v-row>
       <v-col cols="12" md="7">
-        <ModuleList />
+        <ModuleList
+          :title="`Mis modulos`"
+          :subtitle="`Modulos en los que estoy matriculado.`"
+          :onlyEnrolled="true"
+        />
       </v-col>
       <v-col cols="12" md="5">
         <CoursesExtracurricularList />
