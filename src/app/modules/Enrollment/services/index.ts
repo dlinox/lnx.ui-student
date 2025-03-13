@@ -72,3 +72,12 @@ export const _reserverGroupEnrollment = async (data: any): Promise<boolean> => {
     return false;
   }
 };
+//cancel-group-enrollment
+export const _cancelGroupEnrollment = async (data: any): Promise<boolean> => {
+  try {
+    await http().post(`${modulePath}/cancel-group-enrollment`, data);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

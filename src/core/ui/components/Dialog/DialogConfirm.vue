@@ -1,31 +1,23 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    max-width="350"
-    activator="parent"
-    :persistent="true"
-  >
-    <v-card prepend-icon="mdi-alert-circle" :title="title">
+  <v-dialog v-model="dialog" max-width="350" activator="parent" :persistent="true">
+    <v-card>
+      <v-card-title class="d-flex align-center bg-grey-lighten-4 py-4">
+        <LnxIcon iconName="information" />
+
+        <small class="ms-2">
+          {{ title }}
+        </small>
+      </v-card-title>
+      <slot></slot>
       <v-card-item class="text-center border-t border-b">
         {{ message }}
       </v-card-item>
       <v-card-actions>
-        <v-btn
-          type="button"
-          color="secondary"
-          variant="text"
-          @click="onClose"
-          :disabled="loading"
-        >
+        <v-btn type="button" color="secondary" variant="tonal" @click="onClose" :disabled="loading">
           {{ textCancel }}
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn
-          type="button"
-          color="primary"
-          @click="onConfirm"
-          :loading="loading"
-        >
+        <v-btn type="button" color="primary" variant="flat" @click="onConfirm" :loading="loading">
           {{ textConfirm }}
         </v-btn>
       </v-card-actions>
@@ -34,6 +26,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import LnxIcon from "../icons/LnxIcon.vue";
 
 const emit = defineEmits(["onConfirm", "onCancel"]);
 
