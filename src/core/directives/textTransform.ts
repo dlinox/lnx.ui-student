@@ -1,6 +1,5 @@
 import { type Directive } from "vue";
 
-//input: <input v-upper-case />
 const upperCase: Directive = {
   beforeMount(el) {
     // Escucha los eventos de entrada para modificar el valor

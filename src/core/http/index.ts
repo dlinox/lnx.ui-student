@@ -22,11 +22,12 @@ export const http = (
       return response;
     },
     (error: any) => {
-      if (error.response?.status === 300) {
+      if (!error.response) {
+        toast.error("Error de conexión. Verifica tu internet.");
+      } else if (error.response.status === 300) {
         toast.warning(error.response?.data.message || "Error desconocido");
       } else {
         toast.error(error.response?.data.message || "Error desconocido");
-        console.log(error.response?.data);
       }
       return Promise.reject(error);
     }

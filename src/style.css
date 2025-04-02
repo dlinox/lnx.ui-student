@@ -4,9 +4,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -110,8 +108,14 @@
   display: inline-block;
   width: 1rem;
   height: 1rem;
-  /* <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle opacity="0.5" cx="12" cy="12" r="10" stroke="#1C274C" stroke-width="1.5"></circle> <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg> */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E %3Ccircle opacity='0.5' cx='12' cy='12' r='10' stroke='%231C274C' stroke-width='1.5'%3E%3C/circle%3E %3Cpath d='M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5' stroke='%231C274C' stroke-width='1.5' stroke-linecap='round'%3E%3C/path%3E %3C/g%3E%3C/svg%3E");
 
 }
 
+.link {
+  color: #3f51b5;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

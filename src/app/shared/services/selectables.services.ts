@@ -12,6 +12,18 @@ export const __getStudentTypesForSelect = async (): Promise<
   }
 };
 
+
+export const __getDocumentTypesForSelect = async (): Promise<
+  ItemSelectable[]
+> => {
+  try {
+    const response = await http().get(`/document-types/items/for-select`);
+    return response.data.data;
+  } catch (error) {
+    return [];
+  }
+};
+
 export const __getCurrentPeriod = async (): Promise<ItemSelectable> => {
   try {
     const response = await http().get(`/period/current`);

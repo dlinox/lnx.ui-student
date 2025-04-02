@@ -1,1 +1,0 @@
-import{n as e}from"./index-BXNEzOpw.js";const a="modules",o=async r=>{try{return(await e().post(`${a}/curriculum`,r)).data.data}catch{return[]}},c=async(r,t)=>{try{return(await e().get(`${a}/${r}/curriculum/${t}`)).data.data}catch{return{}}};export{c as _,o as a};

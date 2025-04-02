@@ -1,16 +1,17 @@
-import { user, } from "@/app/modules/Auth/services";
+import { _clearSession, _user } from "@/app/modules/Auth/services";
 
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
+
 
 export const authMiddleware = async (
   _to: RouteLocationNormalized,
   _from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const auth = await user();
+  const auth = await _user();
   if (!auth) {
+    await _clearSession();
     console.log("Redirecting to login page...");
-    // await clearSession();
     next({ name: "Login" });
   } else {
     next();
@@ -23,11 +24,13 @@ export const noAuthMiddleware = async (
   _from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const auth = await user();
+  const auth = await _user();
   if (auth) {
     console.log("Redirecting to dashboard...");
     next(auth.user.redirectTo);
   } else {
+    
+    await _clearSession();
     next();
   }
 };

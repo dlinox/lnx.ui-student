@@ -1,21 +1,58 @@
 <template>
-  <v-row :no-gutters="true">
+  <v-row>
     <v-col cols="12">
-      <v-card
-        :title="props.title"
-        :subtitle="props.subtitle"
-        class="rounded-0 border"
-        elevation="0"
-      />
+      <v-card :title="props.title" :subtitle="props.subtitle" elevation="0" />
     </v-col>
+
+    <v-col cols="12" v-if="loading">
+      <v-skeleton-loader
+        class="mx-auto"
+        elevation="2"
+        type="article, actions"
+      ></v-skeleton-loader>
+    </v-col>
+
+    <v-col cols="12" v-else-if="moduleItems.length === 0">
+      <v-empty-state
+        image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/teamwork.png"
+      >
+        <template v-slot:title>
+          <div class="text-subtitle-2 mt-8">No tienes modulos registrados</div>
+        </template>
+
+        <template v-slot:text>
+          <div class="text-caption">
+            Matriculese a un modulo para ver los cursos
+          </div>
+        </template>
+
+        <template v-slot:actions>
+          <v-btn
+            class="text-none"
+            color="white"
+            elevation="1"
+            link
+            @click="router.push({ name: 'Modules' })"
+            text="Ver todos los modulos"
+          >
+          </v-btn>
+        </template>
+      </v-empty-state>
+    </v-col>
+
     <v-col v-for="module in moduleItems" :key="module.id" cols="12">
-      <v-card elevation="0" class="rounded-5 border mb-4">
-        <v-img
-          height="50px"
-          src="https://media.istockphoto.com/id/1218737747/vector/learning-online-e-learning-video-call-chat-with-class-distance-education.jpg?s=612x612&w=0&k=20&c=fFFwc3CTP4XtvmruZLiK8EzAbzvAxJL_kw5BsA7z7w8="
-          cover
-        ></v-img>
-        <v-card-title>{{ module.name }}</v-card-title>
+      <v-card elevation="2">
+        <v-card-subtitle
+          v-if="module.isExtracurricular == 1"
+          class="text-caption text-primary pt-3"
+        >
+          Cursos extracurriculares
+        </v-card-subtitle>
+
+        <v-card-title>
+          {{ module.name }}
+        </v-card-title>
+
         <v-card-item>
           <v-row no-gutters>
             <v-col cols="12" class="border-right">
@@ -25,7 +62,6 @@
                 {{ module.hoursTheory }} Hr. Teoricas
               </small>
             </v-col>
-            <v-col cols="6"> </v-col>
           </v-row>
         </v-card-item>
         <v-card-actions>
@@ -52,12 +88,16 @@ const props = defineProps<{
   onlyEnrolled: boolean;
 }>();
 
+const loading = ref<boolean>(true);
 const router = useRouter();
 const moduleItems = ref<any[]>([]);
+
 const initComponent = async () => {
+  loading.value = true;
   moduleItems.value = await _getModulesByCurriculum({
     onlyEnrolled: props.onlyEnrolled,
   });
+  loading.value = false;
 };
 
 initComponent();

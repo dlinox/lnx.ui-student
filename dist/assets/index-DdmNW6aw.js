@@ -1,0 +1,1 @@
+import{a6 as e}from"./index-CAaPWCzg.js";const a="courses",n=async(r,t)=>{try{return(await e().get(`${a}/curriculum/${t}/module/${r}`)).data.data}catch{return[]}},c=async r=>{try{return(await e().get(`${a}/enabled/${r}`)).data.data}catch{return[]}};export{c as _,n as a};

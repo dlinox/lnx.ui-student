@@ -24,3 +24,14 @@ export const _getModuleByCurriculum = async (
     return {} as any;
   }
 };
+
+export const _getModulesEnabledOnPeriod = async (): Promise<any[]> => {
+  try {
+    const response = await http().get(
+      `${modulePath}/enabled-on-period`
+    );
+    return response.data.data as any[];
+  } catch (error) {
+    return [] as any[];
+  }
+};

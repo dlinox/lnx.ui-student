@@ -25,7 +25,7 @@
       </template>
       <template v-slot:item.actions="{ item, loadDataTable }">
         <v-menu density="compact"
-          v-if="item.period == periodStore?.enrolled?.name && (item.enrollmentStatus == 'MATRICULADO' || item.enrollmentStatus == 'RESERVADO')">
+          v-if="item.period == periodStore?.enrolled?.period && (item.enrollmentStatus == 'MATRICULADO' || item.enrollmentStatus == 'RESERVADO')">
           <template v-slot:activator="{ props }">
             <v-btn icon color="primary" v-bind="props" density="compact" variant="tonal">
               <LnxIcon iconName="setting-5" />

@@ -30,13 +30,46 @@ const routes: RouteRecordRaw[] = [
         name: "Register",
         component: () => import("@/app/modules/Auth/views/RegisterView.vue"),
       },
+      {
+        path: "/verificar/:payload",
+        name: "Verify",
+        component: () => import("@/app/modules/Auth/views/VerifyEmailView.vue"),
+      },
+      {
+        path: "/tipo-estudiante/:payload",
+        name: "StudentType",
+        component: () => import("@/app/modules/Auth/views/StudentTypeView.vue"),
+      },
+      {
+        path: "/datos-personales/:payload",
+        name: "PersonalData",
+        component: () => import("@/app/modules/Auth/views/PeronalDataView.vue"),
+      },
+      {
+        path: "/recuperar-contrasena",
+        name: "RecoverPassword",
+        component: () =>
+          import("@/app/modules/Auth/views/RecoverPasswordView.vue"),
+      },
+      {
+        path: "/crear-cuenta",
+        name: "CreateAccount",
+        component: () =>
+          import("@/app/modules/Auth/views/CreateAccountView.vue"),
+      },
+      {
+        path: "/create-account/:payload",
+        name: "CreateAccountForm",
+        component: () =>
+          import("@/app/modules/Auth/views/CreateAccountFormView.vue"),
+      },
     ],
   },
   {
     path: "/",
-    name: "AdminLayout",
+    name: "PanelLayout",
     beforeEnter: authMiddleware,
-    component: () => import("@/app/layouts/AdminLayout.vue"),
+    component: () => import("@/app/layouts/PanelLayout.vue"),
     children: [
       {
         path: "",

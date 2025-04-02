@@ -1,26 +1,17 @@
 <template>
-  <v-card
-    title="Mis matriculas"
-    subtitle="Lista de matriculas realizadas"
-    class="rounded-0"
-  >
-    <template v-slot:append>
-      <v-btn variant="text" @click="$router.go(-1)">
-        <template v-slot:prepend>
-          <LnxIcon iconName="arrow-left-3" size="large" />
-        </template>
-        Atrás
-      </v-btn>
-    </template>
-  </v-card>
-  <DataTable />
+  <v-container>
+    <DataTable />
+  </v-container>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from "vue";
 import DataTable from "@/app/modules/Enrollment/components/DataTable/DataTable.vue";
-
-const initView = async () => {};
+import { useHeadingStore } from "@/app/store/heading.store";
+const headingStore = useHeadingStore();
+const initView = async () => {
+  headingStore.setHeading("Mis matriculas", "Lista de matriculas realizadas");
+};
 
 onMounted(() => {
   initView();

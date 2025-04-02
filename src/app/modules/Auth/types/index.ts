@@ -18,7 +18,11 @@ export interface AuthDTO {
   permissions: string;
 }
 
+export interface RegisterRequestDTO {
+  email: string;
+}
 export const AuthFormRules = {
   username: [required],
   password: [required],
 };
+

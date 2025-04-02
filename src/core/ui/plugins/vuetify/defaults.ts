@@ -1,10 +1,10 @@
+
 export default {
   VCard: {
     VCardActions: {
       class: "pa-4",
       VBtn: {
         variant: "tonal",
-        rounded: "0",
         color: "primary",
         class: "px-6 text-sm",
       },
@@ -14,29 +14,29 @@ export default {
   VBtn: {
     color: "primary",
     style: "font-size: 14px",
-    rounded: "0",
     variant: "flat",
     size: "large",
     class: "px-4",
     ripple: false,
   },
   VTextField: {
+    style: "font-size: 14px",
+    rounded: "sm",
     color: "black",
-    rounded: "lg",
     hideDetails: "auto",
   },
   VCombobox: {
     color: "black",
-    rounded: "lg",
+    rounded: "sm",
     hideDetails: "auto",
   },
   VTextarea: {
     hideDetails: "auto",
-    rounded: "lg",
+    rounded: "sm",
   },
   VSelect: {
     color: "black",
-    rounded: "lg",
+    rounded: "sm",
     hideDetails: "auto",
     noDataText: "No hay datos disponibles",
   },
@@ -46,7 +46,7 @@ export default {
   },
   VChip: {
     color: "primary",
-    rounded: "lg",
+    rounded: "sm",
     tile: true,
   },
   VSwitch: {

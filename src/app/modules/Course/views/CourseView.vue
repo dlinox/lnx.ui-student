@@ -1,61 +1,79 @@
 <template>
-  <v-card
-    :title="module?.name"
-    subtitle="Cursos"
-    class="rounded-0"
-    elevation="0"
-  >
-    <template v-slot:append>
-      <v-btn variant="text" @click="$router.go(-1)">
-        <template v-slot:prepend>
-          <LnxIcon iconName="arrow-left-3" size="large" />
-        </template>
-        Atrás
-      </v-btn>
-    </template>
-  </v-card>
-
   <v-container>
     <v-row class="">
+      <v-col cols="12" md="5" lg="4">
+        <v-card elevation="1">
+          <v-card-title> </v-card-title>
+
+          <v-list two-line>
+            <v-list-item>
+              <v-list-item-subtitle> Detalles </v-list-item-subtitle>
+              <v-list-item-title three-line class="text-subtitle-2">
+                {{ module?.coursesCount }} Cursos ,
+                {{ module?.hoursPractice }} Hr. Practicas,
+                {{ module?.hoursTheory }} Hr. Teoricas
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-list-item>
+              <v-list-item-subtitle> Creditos </v-list-item-subtitle>
+              <v-list-item-title class="text-subtitle-2">
+                {{ module?.credits }}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-subtitle> Area(s) </v-list-item-subtitle>
+              <v-list-item-title class="text-subtitle-2">
+                {{ module?.areas }}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-subtitle> Precio de matricula </v-list-item-subtitle>
+              <v-list-item-title class="text-subtitle-2">
+                S/. {{ module?.prices }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+          <v-btn
+            v-if="module?.isEnrolled"
+            variant="tonal"
+            block
+            color="success"
+          >
+            <template #prepend>
+              <LnxIcon iconName="verify" />
+            </template>
+            Matriculado
+          </v-btn>
+          <v-card-actions v-if="module?.isEnrolled == false">
+            <v-btn block class="mt-2" v-if="module?.prices !== null">
+              Matricular
+              <ModuleEnrollment :module="module" @success="initView" />
+            </v-btn>
+            <v-alert v-else variant="tonal" color="error">
+              No se puede matricular, no hay precios establecidos.
+            </v-alert>
+          </v-card-actions>
+        </v-card>
+      </v-col>
       <v-col cols="12" md="7" lg="8">
         <v-row>
           <v-col cols="12" v-for="(course, index) in courseItems" :key="index">
-            <v-card
-              elevation="0"
-              class="rounded-5 border"
-              :subtitle="course?.area"
-            >
-              <template v-slot:append>
-                <v-chip
-                  v-if="course.hasEnrollment"
-                  color="primary"
-                  rounded="0"
-                  class="rounded-0"
-                >
-                  Matriculado
-                </v-chip>
-
-                <v-btn
-                  v-if="module?.isEnrolled == true && !course.hasEnrollment"
-                  density="compact"
-                  variant="outlined"
-                >
-                  <EnrollmentGroup :course="course" @success="initView" />
-                  Inscríbete
-                </v-btn>
-              </template>
-
+            <v-card elevation="1" :subtitle="course?.area">
               <v-card-title class="pt-0">
                 <small>
                   <strong>{{ course.code }} - </strong>
                   {{ course.name }}
                 </small>
               </v-card-title>
-              <v-card-item>{{ course.description }}</v-card-item>
+              <v-card-item v-if="course.description" class="text-caption">
+                {{ course.description }}
+              </v-card-item>
               <v-card-item>
                 <small>
-                  Creditos {{ course.credits }} | {{ course.hoursPractice }} Hr.
-                  Practicas | {{ course.hoursTheory }} Hr. Teoricas
+                  {{ course.credits.toFixed(2) }} Creditos |
+                  {{ course.hoursPractice }} Hr. Practicas |
+                  {{ course.hoursTheory }} Hr. Teoricas
                 </small>
               </v-card-item>
               <v-card-item
@@ -68,97 +86,95 @@
                   <v-col cols="12" md="6">
                     <v-list-item>
                       <v-list-item-subtitle>Periodo</v-list-item-subtitle>
-                      <v-list-item-title>
-                        {{ enrollment.period }}
+                      <v-list-item-title class="text-caption">
+                        <v-chip
+                          class="text-caption"
+                          density="compact"
+                          color="blue"
+                          v-if="
+                            enrollment.periodId ==
+                            periodStore?.enrolled?.periodId
+                          "
+                        >
+                          {{ enrollment.period }}
+                        </v-chip>
+                        <span v-else>
+                          {{ enrollment.period }}
+                        </span>
                       </v-list-item-title>
                     </v-list-item>
-
                     <v-list-item>
                       <v-list-item-subtitle>Gupo</v-list-item-subtitle>
-                      <v-list-item-title>
+                      <v-list-item-title class="text-caption">
                         {{ enrollment.group }}
                       </v-list-item-title>
                     </v-list-item>
                     <v-list-item>
                       <v-list-item-subtitle>Docente</v-list-item-subtitle>
-                      <v-list-item-title>
-                        {{ enrollment.teacher }}
+                      <v-list-item-title class="text-caption">
+                        {{ enrollment.teacher || "-" }}
+                      </v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item>
+                      <v-list-item-subtitle>Nota</v-list-item-subtitle>
+                      <v-list-item-title
+                        class="text-caption"
+                        :class="
+                          enrollment.grade >= 10 ? 'text-success' : 'text-error'
+                        "
+                      >
+                        {{ enrollment.grade || "-" }}
                       </v-list-item-title>
                     </v-list-item>
                   </v-col>
                   <v-col cols="12" md="6">
                     <v-list-item>
                       <v-list-item-subtitle>Modalidad</v-list-item-subtitle>
-                      <v-list-item-title>
+                      <v-list-item-title class="text-caption">
                         {{ enrollment.modality }}
                       </v-list-item-title>
                     </v-list-item>
                     <v-list-item>
                       <v-list-item-subtitle>Laboratorio</v-list-item-subtitle>
-                      <v-list-item-title>
+                      <v-list-item-title class="text-caption">
                         {{ enrollment.laboratory }}
                       </v-list-item-title>
                     </v-list-item>
                     <v-list-item>
                       <v-list-item-subtitle>Horario</v-list-item-subtitle>
-                      <v-list-item-title>
+                      <v-list-item-title class="text-caption">
                         {{ enrollment.schedule }}
                       </v-list-item-title>
                     </v-list-item>
+   
                   </v-col>
                 </v-row>
               </v-card-item>
+              <v-card-actions
+                v-if="!course.isApproved && periodStore?.enrolled && course.lastEnrollment != periodStore?.enrolled?.periodId"
+                class="bg-grey-lighten-4"
+              >
+                <v-spacer></v-spacer>
+
+                <!-- <v-btn
+                  icon
+                  class="rounded-lg"
+                  density="comfortable"
+                  variant="text"
+                  color="red"
+                  v-tooltip:top="'Añaadir a deseados'"
+                >
+                  <LnxIcon iconName="heart" />
+                </v-btn> -->
+                <v-btn v-if="module?.isEnrolled" variant="outlined">
+                  <EnrollmentGroup :course="course" @success="initView" />
+                  Inscríbete
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
-      </v-col>
-      <v-col cols="12" md="5" lg="4">
-        <v-card elevation="0" class="rounded-5 border">
-          <v-card-title>Contenido</v-card-title>
-          <v-card-item>
-            <v-list two-line>
-              <v-list-item>
-                <v-list-item-subtitle> Cursos </v-list-item-subtitle>
-                <v-list-item-title three-line>
-                  {{ module?.coursesCount }}, {{ module?.hoursPractice }} Hr.
-                  Practicas, {{ module?.hoursTheory }} Hr. Teoricas
-                </v-list-item-title>
-              </v-list-item>
-
-              <v-list-item>
-                <v-list-item-subtitle>
-                  Cantidad de creditos
-                </v-list-item-subtitle>
-                <v-list-item-title>
-                  {{ module?.credits }}
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-subtitle> Area(s) </v-list-item-subtitle>
-                <v-list-item-title>
-                  {{ module?.areas }}
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-subtitle>
-                  Precio de matricula
-                </v-list-item-subtitle>
-                <v-list-item-title>
-                  S/. {{ module?.prices }}
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-card-item>
-          <v-card-actions v-if="module?.isEnrolled == false">
-            <v-btn block class="mt-2" v-if="module?.prices !== null">
-              Matricular
-              <ModuleEnrollment :module="module" @success="initView" />
-            </v-btn>
-            <v-alert v-else variant="tonal" color="error" class="rounded-0">
-              No se puede matricular, no hay precios establecidos.
-            </v-alert>
-          </v-card-actions>
-        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -171,6 +187,11 @@ import { _getModuleByCurriculum } from "@/app/modules/Module/services";
 import { _getCurriculumCourses } from "@/app/modules/Course/services";
 import ModuleEnrollment from "@/app/modules/Module/components/Enrollment/Enrollment.vue";
 import EnrollmentGroup from "../../Enrollment/components/EnrollmentGroup/EnrollmentGroup.vue";
+import { useHeadingStore } from "@/app/store/heading.store";
+import { usePeriodStore } from "@/app/store/period.stores";
+
+const periodStore = usePeriodStore();
+const headingStore = useHeadingStore();
 const route = useRoute();
 const module = ref<any>(null);
 const courseItems = ref<any[]>([]);
@@ -179,6 +200,7 @@ const initView = async () => {
   moduleId.value = route.params.id as string;
   module.value = await _getModuleByCurriculum(moduleId.value, 2);
   courseItems.value = await _getCurriculumCourses(module.value.id, 2);
+  headingStore.setHeading(module.value.name, "Cursos disponibles del modulo");
 };
 
 onMounted(() => {
