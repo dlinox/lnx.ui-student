@@ -203,8 +203,6 @@ const submit = async () => {
   }
 
   loadingForm.value = false;
-
-  console.log(form.value);
 };
 
 const initForm = async () => {

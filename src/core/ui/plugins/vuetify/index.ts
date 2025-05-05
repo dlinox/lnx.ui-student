@@ -1,4 +1,3 @@
-
 import { createVuetify } from "vuetify";
 import theme from "./themes";
 import defaults from "./defaults";

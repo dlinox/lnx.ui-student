@@ -35,3 +35,5 @@ export const _getModulesEnabledOnPeriod = async (): Promise<any[]> => {
     return [] as any[];
   }
 };
+
+//Route::get('module/{moduleId}/select', [CourseController::class, 'getByModuleForSelect']);

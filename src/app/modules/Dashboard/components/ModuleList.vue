@@ -1,7 +1,16 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-card :title="props.title" :subtitle="props.subtitle" elevation="0" />
+      <v-card :title="props.title" :subtitle="props.subtitle" elevation="0">
+        <v-card-item>
+          <v-text-field
+            class="mx-auto"
+            label="Buscar"
+            hide-details
+            clearable
+          ></v-text-field>
+        </v-card-item>
+      </v-card>
     </v-col>
 
     <v-col cols="12" v-if="loading">

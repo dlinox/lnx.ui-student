@@ -3,8 +3,10 @@ import type { ModuleEnrollmentFormDTO } from "../../types";
 
 export const initialEnrollmentFormState = (): ModuleEnrollmentFormDTO => ({
   moduleId: null,
+  courseId: null,
+  groupId: null,
   curriculumId: null,
-  paymentAmount: null,
+  paymentAmount: 0,
   paymentMethod: null,
   paymentDate: null,
   paymentSequence: null,
@@ -12,6 +14,7 @@ export const initialEnrollmentFormState = (): ModuleEnrollmentFormDTO => ({
 
 export const validationRules = {
   moduleId: [required],
+  courseId: [required],
   curriculumId: [required],
   paymentAmount: [required],
   paymentMethod: [required],

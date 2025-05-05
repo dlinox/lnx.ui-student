@@ -1,0 +1,1 @@
+#inspire{position:relative;background:linear-gradient(90deg,#c7daef,#d8efff,#f4edf4);width:100%;min-height:100dvh}#inspire:before{content:"";position:absolute;top:0;right:0;bottom:0;left:0;background:radial-gradient(#444 1px,transparent 1px);background-size:4px 4px;opacity:.05;pointer-events:none;z-index:0}

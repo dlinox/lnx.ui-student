@@ -99,11 +99,20 @@
         <v-btn icon class="rounded-lg" variant="tonal" size="small">
           <LnxIcon iconName="user" />
           <v-menu activator="parent">
-            <v-list>
-              <!-- <v-list-item value="profile">
+            <v-list density="compact" nav>
+              <v-list-item value="profile">
+                <template v-slot:prepend>
+                  <LnxIcon iconName="user" />
+                </template>
                 <v-list-item-title> Perfil </v-list-item-title>
-              </v-list-item> -->
-              <v-list-item value="logout" @click="signOutBtn">
+                <v-list-item-subtitle>
+                  <small> {{ authStore.authState?.user?.name }}</small>
+                </v-list-item-subtitle>
+              </v-list-item>
+              <v-list-item value="logout" @click="signOutBtn" class="text-red">
+                <template v-slot:prepend>
+                  <LnxIcon iconName="logout-1" />
+                </template>
                 <v-list-item-title> Cerrar sesión </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -176,8 +185,6 @@ const periodStore = usePeriodStore();
 
 const loading = ref<boolean>(false);
 const drawer = ref<boolean>(false);
-
-
 
 const signOutBtn = async () => {
   loading.value = true;

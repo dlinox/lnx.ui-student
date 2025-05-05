@@ -9,19 +9,25 @@
 <script lang="ts"></script>
 <style>
 #inspire {
-  background-image: url("/resources/images/bg7.png");
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    rgba(199, 218, 239, 1) 0%,
+    rgba(216, 239, 255, 1) 50%,
+    rgba(244, 237, 244, 1) 100%
+  );
+
+  width: 100%;
+  min-height: 100dvh;
   &::before {
     content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(220, 220, 220, 0.5);
-    backdrop-filter: blur(80px);
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(#444 1px, transparent 1px);
+    background-size: 4px 4px;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
   }
 }
 </style>
