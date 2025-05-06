@@ -4,7 +4,6 @@
       <v-col cols="12" md="5" lg="4">
         <v-card elevation="1">
           <v-card-title> </v-card-title>
-
           <v-list two-line>
             <v-list-item>
               <v-list-item-subtitle> Detalles </v-list-item-subtitle>
@@ -138,7 +137,20 @@
                     <v-list-item>
                       <v-list-item-subtitle>Laboratorio</v-list-item-subtitle>
                       <v-list-item-title class="text-caption">
-                        {{ enrollment.laboratory }}
+                        <a
+                          v-if="enrollment.modality == 'VIRTUAL'"
+                          :href="enrollment.virtualLink"
+                          target="_blank"
+                          class="text-primary"
+                        >
+                          <v-icon>
+                            <LnxIcon iconName="link-1" />
+                          </v-icon>
+                          {{ enrollment.laboratory }}
+                        </a>
+                        <span v-else>
+                          {{ enrollment.laboratory }}
+                        </span>
                       </v-list-item-title>
                     </v-list-item>
                     <v-list-item>
@@ -147,12 +159,15 @@
                         {{ enrollment.schedule }}
                       </v-list-item-title>
                     </v-list-item>
-   
                   </v-col>
                 </v-row>
               </v-card-item>
               <v-card-actions
-                v-if="!course.isApproved && periodStore?.enrolled && course.lastEnrollment != periodStore?.enrolled?.periodId"
+                v-if="
+                  !course.isApproved &&
+                  periodStore?.enrolled &&
+                  course.lastEnrollment != periodStore?.enrolled?.periodId
+                "
                 class="bg-grey-lighten-4"
               >
                 <v-spacer></v-spacer>

@@ -10,6 +10,9 @@
         <v-card-item class="px-6">
           <v-row>
             <v-col cols="12" class="text-center">
+              <span class="text-subtitle-1 ">
+                Estudiante
+              </span>
               <h6 class="text-h6">Iniciar sesión</h6>
               <span class="text-caption">
                 Ingrese sus datos para iniciar sesión

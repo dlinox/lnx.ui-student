@@ -8,6 +8,7 @@
             label="Buscar"
             hide-details
             clearable
+            v-model="searchQuery"
           ></v-text-field>
         </v-card-item>
       </v-card>
@@ -49,7 +50,7 @@
       </v-empty-state>
     </v-col>
 
-    <v-col v-for="module in moduleItems" :key="module.id" cols="12">
+    <v-col v-for="module in filteredModuleItems" :key="module.id" cols="12">
       <v-card elevation="2">
         <v-card-subtitle
           v-if="module.isExtracurricular == 1"
@@ -87,7 +88,7 @@
   </v-row>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { _getModulesByCurriculum } from "@/app/modules/Module/services";
 
@@ -100,6 +101,13 @@ const props = defineProps<{
 const loading = ref<boolean>(true);
 const router = useRouter();
 const moduleItems = ref<any[]>([]);
+const searchQuery = ref("");
+
+const filteredModuleItems = computed(() => {
+  return moduleItems.value.filter((module) =>
+    module.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 
 const initComponent = async () => {
   loading.value = true;

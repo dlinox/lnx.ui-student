@@ -4,10 +4,10 @@
       <v-card :title="module?.name" subtitle="Registrar pago">
         <v-alert
           color="gray"
+          class="rounded-0 text-caption"
           variant="tonal"
           text="Recuerda que los pagos se actualizan al día siguiente. Si realizas tu pago hoy, será registrado mañana. Para evitar inconvenientes, te recomendamos pagar con anticipación."
           elevation="0"
-          class="rounded-0"
         >
           <template #prepend>
             <LnxIcon iconName="info-circle" />
