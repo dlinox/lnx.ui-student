@@ -13,18 +13,13 @@
           <v-card-item v-for="(schedule, index) in schedules" :key="index">
             <h6 class="text-h6">
               {{ schedule.dayName }}
-
             </h6>
             <ul>
-              <li
-                v-for="(hour, index) in schedule.hours"
-                :key="index"
-              >
-                
-              <h6 class="text-subtitle-1 d-flex align-center text-primary">  
-                <LnxIcon iconName="clock-1" class="me-2" />
-                {{ hour }}
-              </h6>
+              <li v-for="(hour, index) in schedule.hours" :key="index">
+                <h6 class="text-subtitle-1 d-flex align-center text-primary">
+                  <LnxIcon iconName="clock-1" class="me-2" />
+                  {{ hour }}
+                </h6>
               </li>
             </ul>
           </v-card-item>
@@ -50,7 +45,7 @@ const schedules = ref<any[]>([]);
 const initView = async () => {
   schedules.value = await _getAvailableSchedules();
   headingStore.setHeading(
-    "Mi panel",
+    "Inicio",
     `Bienvenido, ${authStore?.authState?.user.name}`
   );
 };

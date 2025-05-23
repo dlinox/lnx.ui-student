@@ -1,1 +1,0 @@
-import{a6 as a}from"./index-DSW0Bzfl.js";const e="modules",o=async r=>{try{return(await a().post(`${e}/curriculum`,r)).data.data}catch{return[]}},c=async(r,t)=>{try{return(await a().get(`${e}/${r}/curriculum/${t}`)).data.data}catch{return{}}};export{c as _,o as a};
