@@ -22,7 +22,7 @@
                     @click="
                       if (toggle) toggle();
                       form.groupId = item.id;
-                      // form.paymentAmount = item.price;
+                      form.paymentAmount = item.price;
                     "
                     class="border"
                   >

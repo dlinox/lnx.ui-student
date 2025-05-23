@@ -244,7 +244,8 @@ const initForm = async () => {
   form.value = Object.assign({}, initialEnrollmentFormState());
   ruleForm.value = validationRules;
   form.value.moduleId = props.module.id;
-  form.value.paymentAmount = Number(props.module.prices);
+  // form.value.paymentAmount = Number(props.module.prices);
+  form.value.paymentAmount = 0;
   form.value.curriculumId = props.module.curriculumId;
 
   courseItems.value = await _getByModuleForSelect(props.module.id);
