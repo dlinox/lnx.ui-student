@@ -1,0 +1,1 @@
+import{bx as r,b as i}from"./index-DTSvS7Bz.js";const l=r("heading",()=>{const t=i(""),s=i(""),n=e=>{t.value=e},o=e=>{s.value=e};return{title:t,setTitle:n,subtitle:s,setSubtitle:o,setHeading:(e,a)=>{n(e),o(a)}}});export{l as u};
