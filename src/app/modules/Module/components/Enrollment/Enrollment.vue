@@ -50,8 +50,7 @@
                           @click="
                             if (toggle) toggle();
                             form.groupId = item.id;
-                            form.paymentAmount =
-                              Number(props.module.prices) + Number(item.price);
+                            form.paymentAmount = Number(item.price);
                           "
                           class="border"
                         >
