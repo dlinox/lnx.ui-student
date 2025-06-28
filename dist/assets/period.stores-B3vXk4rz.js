@@ -1,0 +1,1 @@
+import{a6 as n,bF as o,b as r}from"./index-C3pYWGt0.js";const a="enrollment-deadlines",l=async()=>{try{return(await n().get(`/${a}/active-enrollment-period`)).data.data}catch{return[]}},u=o("period",()=>{const e=r(null),t=r(null);return{current:e,getCurrent:async()=>{e.value=null},enrolled:t,getEnrolled:async()=>{t.value=await l()}}});export{u};

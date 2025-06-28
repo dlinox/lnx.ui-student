@@ -44,7 +44,7 @@
                                     100 >=
                                   80
                                 ? 'amber-lighten-2'
-                                : 'red-accent-3'
+                                : 'red-accent-4'
                             "
                           >
                             {{
@@ -53,9 +53,6 @@
                           </v-chip>
                         </div>
 
-                        {{ item.group }} -
-                        <strong> S/. {{ item.price }} </strong>
-                        <br />
                         <v-chip
                           class="rounded-0"
                           density="compact"
@@ -64,21 +61,14 @@
                         >
                           {{ item.modality }}
                         </v-chip>
-                        <br />
-                        <small
-                          >Docente: <strong> {{ item.teacher }} </strong></small
-                        >
-                        <br />
-                        <small>
-                          Laboratorio:
-                          <strong> {{ item.laboratory }} </strong>
-                        </small>
+                        {{ item.group }} -
+                        <strong> S/. {{ item.price }} </strong>
+
                         <br />
                         <small>
-                          Horarios:
                           <v-chip
                             rounded="sm"
-                            class="rounded-0 me-1"
+                            class="rounded-0 me-1 mt-3"
                             density="compact"
                             color="primary"
                             v-if="item.schedules"
@@ -146,6 +136,38 @@
                 :rules="ruleForm.paymentDate"
               ></v-text-field>
             </v-col>
+            <v-col cols="12">
+              <v-file-input
+                label="Comprobante de pago"
+                counter
+                counter-string="archivos"
+                accept="image/*"
+                max-files="1"
+                show-size
+                persistent-hint
+                hint="Sube una imagen, permitido hasta 5MB"
+                :rules="[
+                  (v) => !!v || 'El archivo es obligatorio',
+                  (v) =>
+                    v.size < 5000000 || 'El archivo debe pesar menos de 5MB',
+                  (v) =>
+                    [
+                      'image/jpeg',
+                      'image/png',
+                      'image/gif',
+                      'image/bmp',
+                      'image/webp',
+                    ].includes(v.type) || 'El archivo debe ser una imagen',
+                ]"
+                v-model="form.paymentFile"
+              >
+                <template #prepend>
+                  <v-icon>
+                    <LnxIcon iconName="document-upload" />
+                  </v-icon>
+                </template>
+              </v-file-input>
+            </v-col>
           </v-row>
         </v-card-item>
         <v-card-actions>
@@ -176,15 +198,16 @@ import {
   _enabledGroupsEnrollment,
   _storeGroupEnrollment,
 } from "@/app/modules/Enrollment/services";
+import { validationRules } from "@/app/modules/Enrollment/components/ChangeEnrollmentGroup/constants";
 
 const emit = defineEmits(["success"]);
 const props = defineProps<{
   course: any;
 }>();
-
+const formRef = ref<HTMLFormElement | null>(null);
 const dialog = ref(false);
 const loadingForm = ref(false);
-const ruleForm = ref<any>([]);
+const ruleForm = ref<any>(validationRules);
 const form = ref<any>({
   paymentMethod: null,
   paymentSequence: null,
@@ -195,6 +218,8 @@ const form = ref<any>({
 
 const groupItems = ref<any[]>([]);
 const submit = async () => {
+  const { valid } = await formRef.value?.validate();
+  if (!valid) return;
   loadingForm.value = true;
   const response = await _storeGroupEnrollment(form.value);
   if (response) {
@@ -212,6 +237,7 @@ const initForm = async () => {
     paymentAmount: null,
     paymentDate: null,
     groupId: null,
+    paymentFile: null,
   };
 
   groupItems.value = await _enabledGroupsEnrollment({

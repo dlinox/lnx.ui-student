@@ -13,7 +13,7 @@
             <LnxIcon iconName="info-circle" />
           </template>
         </v-alert>
-        <v-card-item class="border-t border-b">
+        <v-card-text class="border-t border-b">
           <v-row>
             <v-col cols="12">
               <v-select
@@ -72,7 +72,7 @@
                                           100 >=
                                         80
                                       ? 'amber-lighten-2'
-                                      : 'red-accent-3'
+                                      : 'red-accent-4'
                                   "
                                 >
                                   {{
@@ -90,18 +90,7 @@
                               </v-chip>
                               {{ item.group }} -
                               <strong> S/. {{ item.price }} </strong>
-
                               <br />
-                              <!-- <small
-                                >Docente:
-                                <strong> {{ item.teacher }} </strong></small
-                              >
-                              <br />
-                              <small>
-                                Laboratorio:
-                                <strong> {{ item.laboratory }} </strong>
-                              </small>
-                              <br /> -->
                               <small>
                                 <v-chip
                                   rounded="sm"
@@ -153,7 +142,23 @@
                 label="Numero de operacion"
                 type="number"
                 :rules="ruleForm.paymentSequence"
-              ></v-text-field>
+              >
+                <!-- <template #append-inner>
+                  <v-btn
+                    variant="text"
+                    icon
+                    size="small"
+                    color="primary"
+                    class="rounded-lg"
+                    density="comfortable"
+                  >
+                    <v-dialog max-width="500" activator="parent">
+                      <v-card> asd </v-card>
+                    </v-dialog>
+                    <LnxIcon iconName="info-circle" />
+                  </v-btn>
+                </template> -->
+              </v-text-field>
             </v-col>
 
             <v-col cols="6">
@@ -174,16 +179,35 @@
                 :rules="ruleForm.paymentDate"
               ></v-text-field>
             </v-col>
+            <v-col cols="12">
+              <v-file-input
+                label="Comprobante de pago"
+                counter
+                counter-text="archivos"
+                accept="image/*"
+                max-files="1"
+                show-size
+                :rules="ruleForm.paymentFile"
+                v-model="form.paymentFile"
+              >
+                <template #prepend>
+                  <v-icon>
+                    <LnxIcon iconName="document-upload" />
+                  </v-icon>
+                </template>
+              </v-file-input>
+            </v-col>
           </v-row>
-        </v-card-item>
+        </v-card-text>
         <v-card-actions>
           <v-btn
             type="button"
             variant="tonal"
             color="secondary"
             @click="dialog = false"
-            >Cancelar</v-btn
           >
+            Cancelar
+          </v-btn>
           <v-btn
             text="Matricular"
             color="primary"
@@ -202,6 +226,7 @@ import { initialEnrollmentFormState, validationRules } from "./constants";
 import { _storeStudentEnrollment } from "@/app/modules/Enrollment/services";
 import { _getByModuleForSelect } from "@/app/modules/Course/services";
 import { _enabledGroupsEnrollment } from "@/app/modules/Enrollment/services";
+import LnxIcon from "@/core/ui/components/icons/LnxIcon.vue";
 
 const emit = defineEmits(["success"]);
 const props = defineProps<{

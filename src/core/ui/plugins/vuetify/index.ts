@@ -2,12 +2,15 @@ import { createVuetify } from "vuetify";
 import theme from "./themes";
 import defaults from "./defaults";
 import { Tooltip } from "vuetify/directives";
-
+import { VFileUpload } from "vuetify/labs/VFileUpload";
 const vuetify = createVuetify({
   defaults: defaults,
   theme: theme,
   directives: {
-    Tooltip: Tooltip, // Agrega la directiva de tooltip
+    Tooltip: Tooltip,
+  },
+  components: {
+    VFileUpload,
   },
 });
 

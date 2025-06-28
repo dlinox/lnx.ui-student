@@ -22,7 +22,16 @@ export const _storeStudentEnrollment = async (
   data: ModuleEnrollmentFormDTO
 ): Promise<boolean> => {
   try {
-    await http().post(`${modulePath}/store-student-enrollment`, data);
+    const auxForm: any = { ...data };
+    if (auxForm.paymentFile) {
+      auxForm.paymentFile = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(auxForm.paymentFile);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+      });
+    }
+    await http().post(`${modulePath}/store-student-enrollment`, auxForm);
     return true;
   } catch (error) {
     return false;
@@ -43,11 +52,18 @@ export const _enabledGroupsEnrollment = async (data: any): Promise<any[]> => {
   }
 };
 
-// Route::post('store-group-enrollment', [EnrollmentController::class, 'storeGroupEnrollment']);
-
 export const _storeGroupEnrollment = async (data: any): Promise<boolean> => {
   try {
-    await http().post(`${modulePath}/store-group-enrollment`, data);
+    const auxForm: any = { ...data };
+    if (auxForm.paymentFile) {
+      auxForm.paymentFile = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(auxForm.paymentFile);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+      });
+    }
+    await http().post(`${modulePath}/store-group-enrollment`, auxForm);
     return true;
   } catch (error) {
     return false;
