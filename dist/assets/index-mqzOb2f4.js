@@ -1,0 +1,1 @@
+import{a6 as t}from"./index-m7IQwQKl.js";const a="courses",n=async(r,e)=>{try{return(await t().get(`${a}/curriculum/${e}/module/${r}`)).data.data}catch{return[]}},c=async r=>{try{return(await t().get(`${a}/module/${r}/select`)).data.data}catch{return[]}},u=async()=>{try{return(await t().get(`${a}/enabled-groups`)).data.data}catch{return[]}};export{u as _,c as a,n as b};

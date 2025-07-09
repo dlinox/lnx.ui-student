@@ -10,7 +10,7 @@ import DataTable from "@/app/modules/Enrollment/components/DataTable/DataTable.v
 import { useHeadingStore } from "@/app/store/heading.store";
 const headingStore = useHeadingStore();
 const initView = async () => {
-  headingStore.setHeading("Mis matriculas", "Lista de matriculas realizadas");
+  headingStore.setHeading("Mis matrículas", "Lista de matrículas realizadas");
 };
 
 onMounted(() => {

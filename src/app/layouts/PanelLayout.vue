@@ -138,7 +138,7 @@
               Módulos
             </v-tab>
             <v-tab value="Enrollment" link exact :to="{ name: 'Enrollment' }">
-              Matriculas
+              Matrículas
             </v-tab>
           </v-tabs>
         </v-container>
@@ -151,7 +151,7 @@
         class="rounded-0"
       >
         <v-container>
-          <v-card-title> ¡Matriculas habilitadas! </v-card-title>
+          <v-card-title> ¡Matrículas habilitadas! </v-card-title>
           <v-card-subtitle>
             Las matrículas para el ciclo académico
             <b>{{ periodStore.enrolled?.period }}</b> están habilitadas.
@@ -159,12 +159,12 @@
         </v-container>
       </v-card>
       <RouterView />
+      <v-footer app>
+        <span class="text-caption text-end w-100">
+          © {{ new Date().getFullYear() }} Instituto de Informática - UNAP. v1.0
+        </span>
+      </v-footer>
     </v-main>
-    <v-footer>
-      <span class="text-caption text-end w-100">
-        © {{ new Date().getFullYear() }} Instituto de Informática - UNAP. v1.0
-      </span>
-    </v-footer>
   </v-app>
 </template>
 <script setup lang="ts">

@@ -6,18 +6,9 @@
           <v-card-title> </v-card-title>
           <v-list two-line>
             <v-list-item>
-              <v-list-item-subtitle> Detalles </v-list-item-subtitle>
+              <v-list-item-subtitle> Cursos </v-list-item-subtitle>
               <v-list-item-title three-line class="text-subtitle-2">
-                {{ module?.coursesCount }} Cursos ,
-                {{ module?.hoursPractice }} Hr. Practicas,
-                {{ module?.hoursTheory }} Hr. Teoricas
-              </v-list-item-title>
-            </v-list-item>
-
-            <v-list-item>
-              <v-list-item-subtitle> Creditos </v-list-item-subtitle>
-              <v-list-item-title class="text-subtitle-2">
-                {{ module?.credits }}
+                {{ module?.coursesCount }}
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
@@ -27,7 +18,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
-              <v-list-item-subtitle> Precio de matricula </v-list-item-subtitle>
+              <v-list-item-subtitle> Precio de matrícula </v-list-item-subtitle>
               <v-list-item-title class="text-subtitle-2">
                 S/. {{ module?.prices }}
               </v-list-item-title>
@@ -58,8 +49,13 @@
       <v-col cols="12" md="7" lg="8">
         <v-row>
           <v-col cols="12" v-for="(course, index) in courseItems" :key="index">
-            <v-card elevation="1" :subtitle="course?.area">
-              <v-card-title class="pt-0">
+            <v-card elevation="1">
+              <v-card-subtitle class="mt-3">
+                <small>
+                  {{ course?.area }}
+                </small>
+              </v-card-subtitle>
+              <v-card-title class="pt-0 mt-0">
                 <small>
                   <strong>{{ course.code }} - </strong>
                   {{ course.name }}
@@ -68,13 +64,7 @@
               <v-card-item v-if="course.description" class="text-caption">
                 {{ course.description }}
               </v-card-item>
-              <v-card-item>
-                <small>
-                  {{ course.credits.toFixed(2) }} Creditos |
-                  {{ course.hoursPractice }} Hr. Practicas |
-                  {{ course.hoursTheory }} Hr. Teoricas
-                </small>
-              </v-card-item>
+
               <v-card-item
                 class="border-t"
                 v-if="course.hasEnrollment"
@@ -161,6 +151,31 @@
                     </v-list-item>
                   </v-col>
                 </v-row>
+                <v-list-item
+                  v-if="enrollment.periodId == periodStore?.enrolled?.periodId"
+                  variant="tonal"
+                  class="rounded-lg mt-3"
+                >
+                  <v-list-item-title class="text-subtitle-2">
+                    Matriculados
+                  </v-list-item-title>
+                  <template #append>
+                    {{ enrollment.countStudents }} /
+                    {{ enrollment.minStudents }}
+                  </template>
+                  <v-progress-linear
+                    :max="enrollment.minStudents"
+                    :model-value="enrollment.countStudents"
+                    color="dark"
+                    height="12"
+                    rounded
+                  />
+                  <v-list-item-subtitle>
+                    <small>
+                      Mínimo requerido: {{ enrollment.minStudents }}
+                    </small>
+                  </v-list-item-subtitle>
+                </v-list-item>
               </v-card-item>
               <v-card-actions
                 v-if="
@@ -215,7 +230,7 @@ const initView = async () => {
   moduleId.value = route.params.id as string;
   module.value = await _getModuleByCurriculum(moduleId.value, 2);
   courseItems.value = await _getCurriculumCourses(module.value.id, 2);
-  headingStore.setHeading(module.value.name, "Cursos disponibles del modulo");
+  headingStore.setHeading(module.value.name, "Cursos disponibles del módulo");
 };
 
 onMounted(() => {

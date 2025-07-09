@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-card
           title="Cursos disponibles"
-          subtitle="Cursos habilitados para matricula"
+          subtitle="Cursos habilitados para matrícula"
           class="card-course-available"
           
         >
@@ -40,7 +40,7 @@
 
               <v-card-subtitle>
                 <small>
-                  10 Creditos | 50 Hr. Practicas | 50 Hr. Teoricas
+                  10 Créditos | 50 Hr. Prácticas | 50 Hr. Teóricas
                 </small>
               </v-card-subtitle>
               <v-card-actions>

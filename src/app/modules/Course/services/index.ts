@@ -50,3 +50,12 @@ export const _getByModuleForSelect = async (
     return [] as any[];
   }
 };
+
+export const _getEnabledGroups = async (): Promise<any[]> => {
+  try {
+    const response = await http().get(`${modulePath}/enabled-groups`);
+    return response.data.data as any[];
+  } catch (error) {
+    return [] as any[];
+  }
+};

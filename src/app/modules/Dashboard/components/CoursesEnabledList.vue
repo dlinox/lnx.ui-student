@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-card
           title="Cursos disponibles"
-          subtitle="Cursos habilitados para matricula"
+          subtitle="Cursos habilitados para matrícula"
           class="card-course-available"
         >
           <v-card-item class="border-t">
@@ -36,8 +36,8 @@
 
               <v-card-subtitle>
                 <small>
-                  {{ item.credits }} Creditos | {{ item.hoursPractice }} Hr.
-                  Practicas | {{ item.hoursTheory }} Hr. Teoricas
+                  {{ item.credits }} Créditos | {{ item.hoursPractice }} Hr.
+                  Prácticas | {{ item.hoursTheory }} Hr. Teóricas
                 </small>
               </v-card-subtitle>
               <v-card-actions>
@@ -47,7 +47,7 @@
                   link
                   :to="{ name: 'Course', params: { id: item.moduleId } }"
                 >
-                  Ver Modulo
+                  Ver Módulo
                 </v-btn>
               </v-card-actions>
             </v-card>

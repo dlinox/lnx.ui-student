@@ -27,12 +27,12 @@
         image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/teamwork.png"
       >
         <template v-slot:title>
-          <div class="text-subtitle-2 mt-8">No tienes modulos registrados</div>
+          <div class="text-subtitle-2 mt-8">No tienes módulos registrados</div>
         </template>
 
         <template v-slot:text>
           <div class="text-caption">
-            Matriculese a un modulo para ver los cursos
+            Matricúlese a un módulo para ver los cursos
           </div>
         </template>
 
@@ -56,27 +56,47 @@
           v-if="module.isExtracurricular == 1"
           class="text-caption text-primary pt-3"
         >
-          Cursos extracurriculares
+          <v-chip density="compact" color="indigo" class="text-subtitle-2">
+            <small> Extracurricular / Especial </small>
+          </v-chip>
         </v-card-subtitle>
 
         <v-card-title>
           {{ module.name }}
         </v-card-title>
+        <v-row>
+          <v-col cols="6">
+            <v-list-item>
+              <template #prepend>
+                <v-avatar color="blue" size="40" rounded="lg">
+                  <LnxIcon iconName="book" />
+                </v-avatar>
+              </template>
+              <v-list-item-title class="text-h5">
+                {{ module.coursesCount }}
+              </v-list-item-title>
+              <v-list-item-subtitle> Cursos Disponibles </v-list-item-subtitle>
+            </v-list-item>
+          </v-col>
+          <v-col cols="6">
+            <v-list-item>
+              <template #prepend>
+                <v-avatar color="amber-accent-3" size="40" rounded="lg">
+                  <LnxIcon iconName="book-saved" />
+                </v-avatar>
+              </template>
+              <v-list-item-title class="text-h5">
+                {{ module.coursesEnrollmentCount }}
+              </v-list-item-title>
+              <v-list-item-subtitle>Cursos Matriculados </v-list-item-subtitle>
+            </v-list-item>
+          </v-col>
+        </v-row>
 
-        <v-card-item>
-          <v-row no-gutters>
-            <v-col cols="12" class="border-right">
-              <small>
-                {{ module.coursesCount }} Cursos | {{ module.credits }} Creditos
-                | {{ module.hoursPractice }} Hr. Practicas |
-                {{ module.hoursTheory }} Hr. Teoricas
-              </small>
-            </v-col>
-          </v-row>
-        </v-card-item>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
+            variant="outlined"
             @click="router.push({ name: 'Course', params: { id: module.id } })"
             link
           >
